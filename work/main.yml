@@ -7,3 +7,5 @@
   roles:
     - ansible-download-directory
     - google-chrome
+    - iterm2
+    - zsh
