@@ -1,0 +1,2 @@
+---
+- homebrew_cask: name=intellij-idea state=present
