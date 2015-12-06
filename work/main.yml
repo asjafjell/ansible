@@ -1,8 +1,9 @@
 ---
-- hosts: test
+- hosts: localhost
   connection: local
   vars:	
     home_directory: /Users/{{ ansible_user_id }}
     downloads_directory: /{{ home_directory }}/.ansible/downloads
   roles:
     - ansible-download-directory
+    - google-chrome
