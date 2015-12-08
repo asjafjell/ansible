@@ -8,5 +8,6 @@
     - ansible-download-directory
     - google-chrome
     - iterm2
-    - zsh
+    #- zsh
     - intellij-idea
+    - java

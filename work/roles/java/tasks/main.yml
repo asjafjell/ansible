@@ -1,0 +1,22 @@
+---
+- name: Install java 7 
+  shell: brew cask install caskroom/versions/java7
+  register: java7status
+
+- name: Java 7 install result 
+  debug: var=java7status.stderr
+
+- name: Install latest java
+  shell: brew cask install java
+  register: javaLatestStatus
+
+- name: Java Latest install result
+  debug: var=javaLatestStatus.stderr
+
+- name: install java environment manager 
+  homebrew: name=jenv state=present
+
+#TODO1: Add cat eval "$(jenv init -)" til .zshrc som gitt av jenv doctor
+#TODO2: jenv add /Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home
+#TODO3: jenv add /Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home
+#TODO4: Sett global versjon til java8: jenv global oracle64-1.8.0.66
