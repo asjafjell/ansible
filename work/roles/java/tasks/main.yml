@@ -1,4 +1,13 @@
 ---
+- name: Install java environment manager 
+  homebrew: name=jenv state=present
+
+- name: Add Jenv to .zshrc - part1
+  shell: echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> ~/.zshrc
+
+- name: Add Jenv to .zshrc - part2
+  shell: echo 'eval "$(jenv init -)"' >> ~/.zshrc
+
 - name: Install java 7 
   shell: brew cask install caskroom/versions/java7
   register: java7status
@@ -6,17 +15,47 @@
 - name: Java 7 install result 
   debug: var=java7status.stderr
 
+- name: Java 7 install dir to variable
+  shell: /usr/libexec/java_home -v 1.7 -d64
+  register: java7InstallDir
+
+- name: Add Java 7 to jenv
+  command: jenv add {{ java7InstallDir.stdout }}
+  register: jenvJava7Status
+  failed_when: "'No such file' in jenvJava7Status.stdout"
+
 - name: Install latest java
   shell: brew cask install java
   register: javaLatestStatus
 
-- name: Java Latest install result
+- name: Java 8 install result
   debug: var=javaLatestStatus.stderr
 
-- name: install java environment manager 
-  homebrew: name=jenv state=present
+- name: Java 8 install dir to variable
+  shell: /usr/libexec/java_home -v 1.8 -d64
+  register: java8InstallDir
+
+- name: Add Java 8 to jenv
+  command: jenv add {{ java8InstallDir.stdout }}
+  register: jenvJava8Status
+  failed_when: "'No such file' in jenvJava8Status.stdout"
+
+- name: Java install folder exists
+  file: dest=/Library/Java/JavaVirtualMachines/ state=directory
+
+# - name: Add java7 to 
+
+
+
+#- name: Add Java Latest to jenv
+#  command: jenv add /Library/Java/JavaVirtualMachines/
+#  register: jenvJavaLatestStatus
+#  failed_when: "'not a valid path' in jenvJavaLatestStatus.stdout"
+
+
 
 #TODO1: Add cat eval "$(jenv init -)" til .zshrc som gitt av jenv doctor
-#TODO2: jenv add /Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home
+
+
 #TODO3: jenv add /Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home
 #TODO4: Sett global versjon til java8: jenv global oracle64-1.8.0.66
