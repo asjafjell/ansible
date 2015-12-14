@@ -50,10 +50,10 @@
 # Set java 8 as default
 #######
 
-# - name: Java8 major as global version
-#   command: jenv global 1.8
-#   register: jenvGlobalStatus
+- name: Java8 major as global version
+  command: jenv global 1.8
+  register: jenvGlobalStatus
 
-# - debug: Java8 global version result
-#   debug: var=jenvGlobalStatus.stderr
+- debug: Java8 global version result
+  debug: var=jenvGlobalStatus.stderr
 
