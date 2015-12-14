@@ -1,0 +1,59 @@
+---
+
+#####
+# Install jenv
+#####
+
+- name: Install java environment manager 
+  homebrew: name=jenv state=present
+
+- name: Add Jenv to .zshrc - part1
+  shell: echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> ~/.zshrc
+
+- name: Add Jenv to .zshrc - part2
+  shell: echo 'eval "$(jenv init -)"' >> ~/.zshrc
+
+- name: Source .zshrc
+  shell: source ~/.zshrc
+
+######
+# Add java 7
+######
+
+- name: Java 7 install dir to variable
+  shell: /usr/libexec/java_home -v 1.7 -d64
+  register: java7InstallDir
+
+- debug: var=java7InstallDir.stdout
+
+- name: Add Java 7 to jenv
+  command: jenv add {{ java7InstallDir.stdout }}
+  register: jenvJava7Status
+  failed_when: "'No such file' in jenvJava7Status.stdout"
+
+######
+# Add java 8
+######
+
+- name: Java 8 install dir to variable
+  shell: /usr/libexec/java_home -v 1.8 -d64
+  register: java8InstallDir
+
+- debug: var=java8InstallDir.stdout
+
+- name: Add Java 8 to jenv
+  command: jenv add {{ java8InstallDir.stdout }}
+  register: jenvJava8Status
+  failed_when: "'No such file' in jenvJava8Status.stdout"
+
+#######
+# Set java 8 as default
+#######
+
+# - name: Java8 major as global version
+#   command: jenv global 1.8
+#   register: jenvGlobalStatus
+
+# - debug: Java8 global version result
+#   debug: var=jenvGlobalStatus.stderr
+

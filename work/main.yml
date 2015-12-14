@@ -7,7 +7,8 @@
   roles:
     # - ansible-download-directory
     # - google-chrome
-    # - iterm2
-    # - zsh
+    - iterm2
+    - zsh
     # - intellij-idea
     - java
+    - jenv
