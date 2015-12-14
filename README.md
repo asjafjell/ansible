@@ -12,8 +12,8 @@ Installs programs often used in my work environment, like Google-Chrome, Iterm2 
 4. Run ansible script: `ansible-playbook main.yml -i hosts`
 
 ## Todo
-* Split into two main tasks. One for programs and one for more specific work environment
+* Use [lineinfile](http://docs.ansible.com/ansible/lineinfile_module.html) for adding .zshrc commands for jenv
+* Split into two main tasks. One for programs and one for more specific work environment like java
 * Use downloads folder for scripts downloading every time (like zsh)
 * Configure shell with autocomplete like [here](http://sourabhbajaj.com/mac-setup/iTerm/zsh.html)
-* Set up Java
 * Set up environment variables
