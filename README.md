@@ -13,6 +13,7 @@ Installs programs often used in my work environment, like Google-Chrome, Iterm2 
 
 ## Todo
 * Use [lineinfile](http://docs.ansible.com/ansible/lineinfile_module.html) for adding .zshrc commands for jenv
+* Split Java tasks and jenv for java 7 and 8
 * Split into two main tasks. One for programs and one for more specific work environment like java
 * Use downloads folder for scripts downloading every time (like zsh)
 * Configure shell with autocomplete like [here](http://sourabhbajaj.com/mac-setup/iTerm/zsh.html)
